@@ -1,0 +1,11 @@
+Options +FollowSymLinks
+IndexIgnore */*
+RewriteEngine on
+
+RewriteRule ^uploads/(.*)$ backend/web/uploads/$1 [L]
+RewriteRule ^assets/(.*)$ frontend/web/assets/$1 [L]
+RewriteRule (.*) /frontend/web/$1
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /frontend/web/index.php
