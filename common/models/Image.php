@@ -19,6 +19,7 @@ use Yii;
  */
 class Image extends \yii\db\ActiveRecord
 {
+    public $imageFiles;
     /**
      * {@inheritdoc}
      */
@@ -39,6 +40,7 @@ class Image extends \yii\db\ActiveRecord
             [['name'], 'string', 'max' => 30],
             [['what'], 'string', 'max' => 20],
             [['contactid'], 'exist', 'skipOnError' => true, 'targetClass' => Contact::class, 'targetAttribute' => ['contactid' => 'id']],
+            [['imageFiles'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg', 'maxFiles' => 4],
         ];
     }
 
@@ -66,5 +68,19 @@ class Image extends \yii\db\ActiveRecord
     public function getContact()
     {
         return $this->hasOne(Contact::class, ['id' => 'contactid']);
+    }
+
+    public function upload($fileName)
+    {
+        if ($this->validate()) { 
+            $count = 1;
+            foreach ($this->imageFiles as $file) {
+                $file->saveAs('uploads/image/' .$count.'_'.$fileName . '.' . $file->extension);
+                $count++;
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -3,19 +3,18 @@
 use yii\helpers\Html;
 
 /** @var yii\web\View $this */
-/** @var common\models\Contact $model */
+/** @var common\models\Video $model */
 
-$this->title = 'Create Contact';
-$this->params['breadcrumbs'][] = ['label' => 'Contacts', 'url' => ['index']];
+$this->title = 'Create Video';
+$this->params['breadcrumbs'][] = ['label' => 'Videos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="contact-create">
+<div class="video-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,
-        'model1' => $model1,
     ]) ?>
 
 </div>

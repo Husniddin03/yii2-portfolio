@@ -19,6 +19,7 @@ use Yii;
  */
 class Video extends \yii\db\ActiveRecord
 {
+    public $videoFile;
     /**
      * {@inheritdoc}
      */
@@ -38,6 +39,7 @@ class Video extends \yii\db\ActiveRecord
             [['views', 'contactid'], 'integer'],
             [['name'], 'string', 'max' => 30],
             [['what'], 'string', 'max' => 20],
+            [['videoFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'mp4'],
             [['contactid'], 'exist', 'skipOnError' => true, 'targetClass' => Contact::class, 'targetAttribute' => ['contactid' => 'id']],
         ];
     }
@@ -66,5 +68,14 @@ class Video extends \yii\db\ActiveRecord
     public function getContact()
     {
         return $this->hasOne(Contact::class, ['id' => 'contactid']);
+    }
+    public function upload($fileName)
+    {
+        if ($this->validate()) { 
+            $this->videoFile->saveAs('uploads/video/'.$fileName.'.'. $this->videoFile->extension);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

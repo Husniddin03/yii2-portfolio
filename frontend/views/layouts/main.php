@@ -23,7 +23,6 @@ PortfolioAsset::register($this);
 <body class="d-flex flex-column h-100">
 <?php $this->beginBody() ?>
 
-<header>
     <!-- Page Loader -->
     <div id="loader-wrapper">
         <div id="loader"></div>
@@ -44,39 +43,30 @@ PortfolioAsset::register($this);
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link nav-link-1 active" aria-current="page" href="index.html">Photos</a>
+                    <a class="nav-link nav-link-1 active" aria-current="page" href="/image/index">Photos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link nav-link-2" href="videos.html">Videos</a>
+                    <a class="nav-link nav-link-2" href="/video/index">Videos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link nav-link-3" href="about.html">About</a>
+                    <a class="nav-link nav-link-3" href="/ourabout/index">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link nav-link-4" href="contact.html">Contact</a>
+                    <a class="nav-link nav-link-4" href="/contact/index">Contact</a>
                 </li>
             </ul>
             </div>
         </div>
     </nav>
-    <div class="tm-hero d-flex justify-content-center align-items-center" data-parallax="scroll" data-image-src="/portfolio/img/hero.jpg">
-        <form class="d-flex tm-search-form">
-            <input class="form-control tm-search-input" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success tm-search-btn" type="submit">
-                <i class="fas fa-search"></i>
-            </button>
-        </form>
-    </div>
-</header>
 
 
-<div class="container-fluid tm-container-content tm-mt-60">
-    <?= Breadcrumbs::widget([
-        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-    ]) ?>
-    <?= Alert::widget() ?>
-    <?= $content ?>
-</div>
+
+<?= Breadcrumbs::widget([
+    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+]) ?>
+<?= Alert::widget() ?>
+<?= $content ?>
+
 
 <footer class="tm-bg-gray pt-5 pb-3 tm-text-gray tm-footer">
     <div class="container-fluid tm-container-small">
@@ -122,6 +112,8 @@ PortfolioAsset::register($this);
         $('body').addClass('loaded');
     });
 </script>
+
+
 
 </body>
 </html>

@@ -7,6 +7,7 @@ use common\models\OuraboutSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * OuraboutController implements the CRUD actions for Ourabout model.
@@ -65,13 +66,16 @@ class OuraboutController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
-    {
+    public function actionCreate(){
         $model = new Ourabout();
-
+        
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            $fileName = time();
+            $model->image = $fileName. '.'. $model->imageFile->extension;
+
+            if($model->upload($fileName) && $model->load(\Yii::$app->request->post()) && $model->save()){
+                return $this->redirect(['view','id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();

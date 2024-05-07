@@ -35,8 +35,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'lastname',
             'job',
             'phone',
-            //'about:ntext',
-            //'location:ntext',
+            // 'about:ntext',
+            // 'location:ntext',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Contact $model, $key, $index, $column) {

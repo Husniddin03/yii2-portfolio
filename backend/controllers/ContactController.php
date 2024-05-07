@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\Connection;
 use common\models\Contact;
 use common\models\ContactSearch;
 use yii\web\Controller;
@@ -68,10 +69,14 @@ class ContactController extends Controller
     public function actionCreate()
     {
         $model = new Contact();
+        $model1 = new Connection();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                $model1->contactid = $model->id;
+                if($model1->load($this->request->post()) && $model1->save()){
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
             }
         } else {
             $model->loadDefaultValues();
@@ -79,6 +84,7 @@ class ContactController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'model1' => $model1,
         ]);
     }
 

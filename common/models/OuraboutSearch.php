@@ -18,7 +18,7 @@ class OuraboutSearch extends Ourabout
     {
         return [
             [['id'], 'integer'],
-            [['image', 'about', 'location'], 'safe'],
+            [['image', 'title','about', 'location'], 'safe'],
         ];
     }
 
@@ -62,6 +62,7 @@ class OuraboutSearch extends Ourabout
         ]);
 
         $query->andFilterWhere(['like', 'image', $this->image])
+            ->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'about', $this->about])
             ->andFilterWhere(['like', 'location', $this->location]);
 

@@ -15,5 +15,7 @@ class PortfolioAsset extends AssetBundle
     ];
     public $js = [
         'js/plugins.js',
+        // 'js/script.js',
+        // // 'fontawesome/attribution.js',
     ];
 }

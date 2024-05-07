@@ -1,18 +1,17 @@
 <?php
 
-namespace backend\controllers;
+namespace frontend\controllers;
 
-use common\models\Video;
-use common\models\VideoSearch;
+use common\models\Ourabout;
+use common\models\OuraboutSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
 
 /**
- * VideoController implements the CRUD actions for Video model.
+ * OuraboutController implements the CRUD actions for Ourabout model.
  */
-class VideoController extends Controller
+class OuraboutController extends Controller
 {
     /**
      * @inheritDoc
@@ -33,13 +32,13 @@ class VideoController extends Controller
     }
 
     /**
-     * Lists all Video models.
+     * Lists all Ourabout models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new VideoSearch();
+        $searchModel = new OuraboutSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -49,7 +48,7 @@ class VideoController extends Controller
     }
 
     /**
-     * Displays a single Video model.
+     * Displays a single Ourabout model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -62,20 +61,17 @@ class VideoController extends Controller
     }
 
     /**
-     * Creates a new Video model.
+     * Creates a new Ourabout model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate(){
-        $model = new Video();
-        
-        if ($this->request->isPost) {
-            $model->videoFile = UploadedFile::getInstance($model, 'videoFile');
-            $fileName = time();
-            $model->name = $fileName. '.'. $model->videoFile->extension;
+    public function actionCreate()
+    {
+        $model = new Ourabout();
 
-            if($model->upload($fileName) && $model->load(\Yii::$app->request->post()) && $model->save()){
-                return $this->redirect(['view','id' => $model->id]);
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();
@@ -87,7 +83,7 @@ class VideoController extends Controller
     }
 
     /**
-     * Updates an existing Video model.
+     * Updates an existing Ourabout model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -107,7 +103,7 @@ class VideoController extends Controller
     }
 
     /**
-     * Deletes an existing Video model.
+     * Deletes an existing Ourabout model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -121,15 +117,15 @@ class VideoController extends Controller
     }
 
     /**
-     * Finds the Video model based on its primary key value.
+     * Finds the Ourabout model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Video the loaded model
+     * @return Ourabout the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Video::findOne(['id' => $id])) !== null) {
+        if (($model = Ourabout::findOne(['id' => $id])) !== null) {
             return $model;
         }
 
