@@ -58,6 +58,7 @@ class ContactController extends Controller
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'connect' => Connection::find()->where(['contactid' => $id])->one(),
         ]);
     }
 
@@ -98,13 +99,15 @@ class ContactController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $connect = Connection::find()->where(['contactid' => $id])->one();
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save() && $connect->load($this->request->post()) && $connect->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'connect' => $connect,
         ]);
     }
 
@@ -115,12 +118,17 @@ class ContactController extends Controller
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id){
+        $data = Connection::find()->where(['contactid' => $id])->one();
+
+        if ($data) {
+            $data->deleteAll(['contactid'=>$data->contactid]);
+        }
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
+
 
     /**
      * Finds the Contact model based on its primary key value.

@@ -25,7 +25,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'location')->textarea(['rows' => 6]) ?>
 
 </div>
-
+<?php if(isset($model1)){ ?>
 <div class="col-4">
     
     <?= $form->field($model1, 'telegram')->textInput(['maxlength' => true]) ?>
@@ -40,6 +40,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model1,'snapchat')->textInput(['maxlength' => true]) ?>
     
 </div>
+<?php }?>
 <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
 </div>

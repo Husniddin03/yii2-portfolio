@@ -25,7 +25,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
+<div class="row">
+<div class="col">
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -35,8 +36,29 @@ $this->params['breadcrumbs'][] = $this->title;
             'job',
             'phone',
             'about:ntext',
-            'location:ntext',
+            // 'location:ntext',
         ],
     ]) ?>
+</div>
+<?php if(isset($connect)){ ?>
+<div class="col">
+    <?= DetailView::widget([
+        'model' => $connect,
+        'attributes' => [
+            'youtube',
+            'facebook',
+            'twitter',
+            'instagram',
+            'linkedin',
+            'tiktok', 
+            'github',
+            'telegram',
+            'whatsapp',
+            'snapchat',
+        ],
+    ]) ?>
+</div>
+<?php }?>
+</div>
 
 </div>
